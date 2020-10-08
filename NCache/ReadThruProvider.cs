@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 using Alachisoft.NCache.Runtime.Caching;
 using Alachisoft.NCache.Runtime.DatasourceProviders;
+
 using Entities;
 
 namespace NCache
@@ -23,6 +24,7 @@ namespace NCache
         {
             Customer value = LoadFromDataSource(key);
             var cacheItem = new ProviderCacheItem(value);
+            cacheItem.ResyncOptions.ResyncOnExpiration = true;
             return cacheItem;
         }
 
@@ -33,7 +35,9 @@ namespace NCache
             {
                 foreach (string key in keys)
                 {
-                    dictionary.Add(key, new ProviderCacheItem(LoadFromDataSource(key)));
+                    ProviderCacheItem cacheItem = new ProviderCacheItem(LoadFromDataSource(key));
+                    cacheItem.ResyncOptions.ResyncOnExpiration = true;
+                    dictionary.Add(key, cacheItem);
                 }
                 return dictionary;
             }

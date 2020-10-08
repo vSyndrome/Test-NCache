@@ -187,11 +187,11 @@ namespace NCache
         //Get all keys in the Cache
         public void GetAllKeys()
         {
-            DictionaryEntry dictionary = new DictionaryEntry();
             int count = 0;
             Console.WriteLine();
             foreach (var key in _cache)
             {
+                DictionaryEntry dictionary = new DictionaryEntry();
                 count++;
                 dictionary = (DictionaryEntry) key;
                 Console.WriteLine("Key " + count +": " + dictionary.Key);
@@ -1095,7 +1095,6 @@ namespace NCache
             Console.WriteLine("File Dependency Added");
         }
 
-
         //Aggregate Dependencies
         public void AggregateDependencies(string key, string filePath, Order order)
         {
@@ -1119,7 +1118,6 @@ namespace NCache
             _cache.Insert(key, cacheItem);
             Console.WriteLine("Aggregate Dependency Added!");
         }
-
 
         //SQL Dependencies
         public void AddSqlDependencies()
@@ -1163,7 +1161,6 @@ namespace NCache
         }
 
 
-
         //---------------------------------------------------------------------------------------------------
         //Searching
 
@@ -1202,7 +1199,6 @@ namespace NCache
             }
         }
 
-
         public void ContinuousQuerySearchByTags(string tag)
         {
             string query = "SELECT $VALUE$ FROM Entities.Customer WHERE $Tag$ = ?";
@@ -1236,7 +1232,6 @@ namespace NCache
             }
         }
 
-
         public void ContinuousQuerySearchByNamedTags(string namedTagKey, string namedTagValue)
         {
             string query = $"SELECT $VALUE$ FROM Entities.Customer WHERE {namedTagKey} = ?";
@@ -1269,7 +1264,6 @@ namespace NCache
                 return;
             }
         }
-
 
         public void ContinuousQueryForProductUnitPrice(int lowerLimitPrice, int upperLimitPrice)
         {
@@ -1306,12 +1300,13 @@ namespace NCache
             }
         }
 
-
         //----------------------------------------------------------------------------------------------------
         //Locking
 
+
         //-------------------
         //Pessimistic Locking
+
 
         //Lock Item in Cache
         public void PessimisticLocking(string key)
@@ -1377,9 +1372,7 @@ namespace NCache
                 Console.WriteLine(e.Message);
             }
 
-
         }
-
 
         //Get Item in Cache
         public Customer GetItem_OptimisticLocking(string key, CacheItemVersion itemVersion)
@@ -1394,11 +1387,9 @@ namespace NCache
             {
                 Console.WriteLine(e.Message);
             }
-
             return result;
         }
 
-        
         //Remove Item in Cache
         public void RemoveItem_OptimisticLocking(string key, CacheItemVersion itemVersion)
         {
@@ -1411,7 +1402,6 @@ namespace NCache
                 Console.WriteLine(e.Message);
             }
         }
-
 
         //-----------------------------------------------------------------------------------------------------
         //Publish Subscribe Messaging
@@ -1775,7 +1765,6 @@ namespace NCache
 
 
 
-
         //----------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------
@@ -1805,6 +1794,17 @@ namespace NCache
                 Console.WriteLine();
                 Console.WriteLine("Session Item Key: " + key.Key);
                 Console.WriteLine("Session Item Value: " + key.Value);
+            }
+        }
+
+        //Get OutputCache Data
+        public void GetOutputCacheData()
+        {
+            var allSessionData = _cache.SearchService.GetKeysByTags(new Tag[1]{ new Tag("NC_ASP.net_output_data")},TagSearchOptions.ByAllTags);
+            foreach (var key in allSessionData)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Output Cache Item Key: " + key);
             }
         }
 

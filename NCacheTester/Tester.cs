@@ -141,7 +141,6 @@ namespace NCacheTester
                 new Tag("Type 4 Customers"),
                 new Tag("Type 5 Customers")
             };
-            
 
             var product1 = new Product()
             {
@@ -229,9 +228,10 @@ namespace NCacheTester
             NewLine();
             program.GetCount();
             NewLine();
+            //program.GetOutputCacheData();
             program.GetAllKeys();
 
-            program.Get("Chat");
+            //program.Get("Chat");
 
             //program.GetSessionData();
             //program.GetViewStateData();
@@ -244,7 +244,6 @@ namespace NCacheTester
             //    customerss[i] = customer;
             //}
             //program.AddBulk(keyset,customerss);
-
 
             //program.AddBulk(productKeys, products);
             //program.ContinuousQueryForProductUnitPrice(3, 10);

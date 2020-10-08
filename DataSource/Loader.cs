@@ -44,6 +44,7 @@ namespace DataSource
                             };
 
                             ProviderCacheItem cacheItem = new ProviderCacheItem(customerObject);
+                            cacheItem.ResyncOptions.ResyncOnExpiration = true;
                             var key = $"Customer:{customerObject.CustomerId}";
                             var keyValuePair = new KeyValuePair<string, ProviderItemBase>(key, cacheItem);
                             loaderResult.Data.Add(keyValuePair);
