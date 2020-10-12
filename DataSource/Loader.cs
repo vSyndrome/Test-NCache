@@ -6,17 +6,18 @@ using System.Data.SqlClient;
 
 using Alachisoft.NCache.Runtime.CacheLoader;
 using Alachisoft.NCache.Runtime.Caching;
+
 using Entities;
 
 namespace DataSource
 {
     public class Loader : ICacheLoader
     {
-        private static string connectionString;
+        private static string _connectionString;
 
         public void Init(IDictionary parameters, string cacheId)
         {
-            connectionString = parameters["ConnectionString"].ToString();
+            _connectionString = parameters["ConnectionString"].ToString();
         }
 
         public LoaderResult LoadNext(object userContext)
@@ -25,7 +26,7 @@ namespace DataSource
             string queryString = "SELECT * FROM Customers";
             try
             {
-                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
                 {
                     if (sqlConnection.State == ConnectionState.Closed)
                         sqlConnection.Open();
@@ -44,7 +45,6 @@ namespace DataSource
                             };
 
                             ProviderCacheItem cacheItem = new ProviderCacheItem(customerObject);
-                            cacheItem.ResyncOptions.ResyncOnExpiration = true;
                             var key = $"Customer:{customerObject.CustomerId}";
                             var keyValuePair = new KeyValuePair<string, ProviderItemBase>(key, cacheItem);
                             loaderResult.Data.Add(keyValuePair);

@@ -20,6 +20,8 @@ namespace NCacheTester
             //Initializing some temporary variables for testing.
 
             string cacheName = "NiftyCache";
+            string cacheName4 = "S1mple";
+            string clientCacheName4 = "S1mpleClientCache";
             string cacheName2 = "MirrorCache";
             string cacheName3 = "PartitionedCache";
             string clientCacheName2 = "MirrorClientCache";
@@ -52,7 +54,6 @@ namespace NCacheTester
                 ContactTitle = "Rifler",
                 Address = "Sweden"
             };
-
             var customer1 = new Customer
             {
                 CustomerId = "KMNOP",
@@ -61,7 +62,6 @@ namespace NCacheTester
                 ContactTitle = "Developer",
                 Address = "32-Newel Road, Palo Alto"
             };
-
             var customer2 = new Customer
             {
                 CustomerId = "RSTUV",
@@ -70,7 +70,6 @@ namespace NCacheTester
                 ContactTitle = "Barrister",
                 Address = "Sydney, Australia"
             };
-
             var customer3 = new Customer
             {
                 CustomerId = "WXYZZ",
@@ -79,7 +78,6 @@ namespace NCacheTester
                 ContactTitle = "Adventurer",
                 Address = "Nowhere"
             };
-
             var customer4 = new Customer
             {
                 CustomerId = "BVCSG",
@@ -88,7 +86,6 @@ namespace NCacheTester
                 ContactTitle = "Assassin",
                 Address = "Paris, France"
             };
-
             var customer5 = new Customer
             {
                 CustomerId = "Drome",
@@ -96,6 +93,29 @@ namespace NCacheTester
                 CompanyName = "Square Enix",
                 ContactTitle = "Explorer",
                 Address = "London, England"
+            };
+            var customer7 = new Customer()
+            {
+                CustomerId = "QWERT",
+                ContactName = "Sasha",
+                ContactTitle = "Awper",
+                CompanyName = "Natus Vincere",
+                Address = "Russia"
+            };
+            var customer8 = new Customer()
+            {
+                CustomerId = "NewID",
+                ContactTitle = "Rifler",
+                ContactName = "Denis",
+                CompanyName = "Astralis",
+                Address = "Greenland"
+            };
+            var customer9 = new Customer()
+            {
+                CustomerId = "Right",
+                ContactTitle = "Lurker",
+                ContactName = "Get_Right",
+                CompanyName = "Ninjas In Pajamas"
             };
 
             Customer[] customerArray = new Customer[]
@@ -106,7 +126,6 @@ namespace NCacheTester
                 customer4,
                 customer5
             };
-
 
             string[] keys = new string[5]
             {
@@ -240,18 +259,18 @@ namespace NCacheTester
             //Customer[] customerss = new Customer[10000];
             //for (int i = 0; i < 10000; i++)
             //{
-            //    keyset[i] = $"Customer:{i+4000}";
+            //    keyset[i] = $"Customer:{i + 4000}";
             //    customerss[i] = customer;
             //}
-            //program.AddBulk(keyset,customerss);
+            //program.AddBulk(keyset, customerss);
 
             //program.AddBulk(productKeys, products);
             //program.ContinuousQueryForProductUnitPrice(3, 10);
 
             //program.TestExtensibleDependency("ABCDE");
 
+            //program.RemoveCacheItem(customerKey);
             //program.AddCacheItem(customerKey, customer2);
-
             //NewLine();
 
             //program.AddCacheItem(customerKey, customer5);

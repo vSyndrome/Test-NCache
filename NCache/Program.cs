@@ -39,7 +39,7 @@ namespace NCache
         private static KeyFilter keyFilter;
 
         private static readonly string connectionString =
-            "Data Source=20.200.20.10;Initial Catalog=Northwind-QA;User ID=diyatech;Password=4Islamabad";
+            "Data Source=20.200.20.10;Initial Catalog=Northwind1;User ID=diyatech;Password=4Islamabad";
 
         //Compact Serialization Implementations
 
@@ -68,13 +68,13 @@ namespace NCache
                 //DefaultReadThruProvider = "DBReadThruProvider",
                 //DefaultWriteThruProvider = "DBWriteThruProvider",
                 //UserCredentials = new Credentials("sal_farooq", "4Islamabad"),
-                ClientRequestTimeOut = TimeSpan.FromSeconds(30),
-                RetryInterval = TimeSpan.FromSeconds(5),
+                ClientRequestTimeOut = TimeSpan.FromSeconds(10),
+                RetryInterval = TimeSpan.FromSeconds(1),
             };
 
             CacheConnectionOptions clientCacheConnectionOptions = new CacheConnectionOptions
             {
-                ConnectionRetries = 5,
+                ConnectionRetries = 1,
                 Mode = Alachisoft.NCache.Client.IsolationLevel.OutProc,
                 //UserCredentials = new Credentials("sal_farooq", "4Islamabad"),
                 RetryInterval = TimeSpan.FromSeconds(5),
@@ -82,7 +82,7 @@ namespace NCache
 
             try
             {
-                _cache = CacheManager.GetCache(cacheName, cacheConnectionOptions, clientCacheName, clientCacheConnectionOptions );
+                _cache = CacheManager.GetCache(cacheName,cacheConnectionOptions, clientCacheName,clientCacheConnectionOptions);
                 //cache = CacheManager.GetCache(cacheName);
                 
                 Console.WriteLine("Connected to Cache: " + cacheName);
@@ -161,7 +161,7 @@ namespace NCache
         {
             if (_cache.Contains(key))
             {
-                Console.WriteLine("Key: " + key + " does exist inside the cache");
+                Console.WriteLine("Key: " + key + " exists inside the cache");
             }
             else
             {
@@ -302,7 +302,7 @@ namespace NCache
         {
             try
             {
-                var writeThruOptions = new WriteThruOptions {Mode = WriteMode.WriteBehind};
+                var writeThruOptions = new WriteThruOptions {Mode = WriteMode.WriteThru};
 
                 var cacheItem = new CacheItem(customer);
                 Console.WriteLine("Before Adding");
@@ -420,7 +420,7 @@ namespace NCache
 
                 Console.WriteLine("Before Adding");
 
-                IDictionary<string, Exception> keysNotAdded = _cache.AddBulk(dictionary,writeThruOptions);
+                IDictionary<string, Exception> keysNotAdded = _cache.AddBulk(dictionary);
                 var items = _cache.GetBulk<Customer>(keys);
                 count = 0;
                 foreach (var item in items)
